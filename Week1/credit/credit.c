@@ -1,6 +1,16 @@
 #include <cs50.h>
 #include <stdio.h>
 
+// 定数の定義
+#define AMEX_MIN 340000000000000
+#define AMEX_MAX 379999999999999
+#define MASTERCARD_MIN 5100000000000000
+#define MASTERCARD_MAX 5599999999999999
+#define VISA_MIN_13 4000000000000
+#define VISA_MAX_13 4999999999999
+#define VISA_MIN_16 4000000000000000
+#define VISA_MAX_16 4999999999999999
+
 // Checksum関数
 int checksum(long long cardNumber);
 
@@ -66,54 +76,25 @@ int checksum(long long cardNumber)
         }
         i++;
     }
-    int sum = second_last_sum + last_sum;
-    return sum;
+    return second_last_sum + last_sum;
 }
 
 // カードのブランドを表示させる
 void printBrand(long long cardNumber)
 {
-    if (cardNumber >= 340000000000000 && cardNumber <= 349999999999999)
+    if ((cardNumber >= AMEX_MIN && cardNumber <= AMEX_MAX) && 
+        ((cardNumber / 10000000000000 == 34) || (cardNumber / 10000000000000 == 37)))
     {
         // American Express: 15digits, starts with 34 or 37
         printf("AMEX\n");
     }
-    else if (cardNumber >= 370000000000000 && cardNumber <= 379999999999999)
+    else if (cardNumber >= MASTERCARD_MIN && cardNumber <= MASTERCARD_MAX)
     {
-        // American Express: 15digits, starts with 34 or 37
-        printf("AMEX\n");
-    }
-    else if (cardNumber >= 5100000000000000 && cardNumber <= 5199999999999999)
-    {
-        // MasterCard: 16digits, starts with 51, 52, 53, 54 or 55
+        // MasterCard: 16digits, starts with 51-55
         printf("MASTERCARD\n");
     }
-    else if (cardNumber >= 5200000000000000 && cardNumber <= 5299999999999999)
-    {
-        // MasterCard: 16digits, starts with 51, 52, 53, 54 or 55
-        printf("MASTERCARD\n");
-    }
-    else if (cardNumber >= 5300000000000000 && cardNumber <= 5399999999999999)
-    {
-        // MasterCard: 16digits, starts with 51, 52, 53, 54 or 55
-        printf("MASTERCARD\n");
-    }
-    else if (cardNumber >= 5400000000000000 && cardNumber <= 5499999999999999)
-    {
-        // MasterCard: 16digits, starts with 51, 52, 53, 54 or 55
-        printf("MASTERCARD\n");
-    }
-    else if (cardNumber >= 5500000000000000 && cardNumber <= 5599999999999999)
-    {
-        // MasterCard: 16digits, starts with 51, 52, 53, 54 or 55
-        printf("MASTERCARD\n");
-    }
-    else if (cardNumber >= 4000000000000 && cardNumber <= 4999999999999)
-    {
-        // Visa: 13 or 16 digits, starts with 4
-        printf("VISA\n");
-    }
-    else if (cardNumber >= 4000000000000000 && cardNumber <= 4999999999999999)
+    else if ((cardNumber >= VISA_MIN_13 && cardNumber <= VISA_MAX_13) ||
+             (cardNumber >= VISA_MIN_16 && cardNumber <= VISA_MAX_16))
     {
         // Visa: 13 or 16 digits, starts with 4
         printf("VISA\n");
