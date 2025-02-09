@@ -1,12 +1,11 @@
-#include <cs50.h>
 #include <ctype.h>
+#include <cs50.h>
 #include <math.h>
 #include <stdio.h>
 #include <string.h>
 
 int only_digits(string s);
 int strtoint(string k);
-int cipher(int key, char p);
 
 int main(int argc, string argv[])
 {
@@ -20,22 +19,8 @@ int main(int argc, string argv[])
         printf("Usage: ./caesar key\n");
         return 1;
     }
-    int key = strtoint(argv[1]);
-    string message = get_string("plaintext: ");
-    // encrypts messages using Caesar’s cipher
-    printf("ciphertext: ");
-    for (int i = 0, n = strlen(message); i < n; i++)
-    {
-        if (isalpha(message[i]))
-        {
-            printf("%c", cipher(key, message[i]));
-        }
-        else
-        {
-            printf("%c", message[i]);
-        }
-    }
-    printf("\n");
+    int result = strtoint(argv[1]);
+    printf("Twise of Your input is integer %i\n", result*2);
     return 0;
 }
 
@@ -46,9 +31,7 @@ int only_digits(string s)
     for (int i = 0; i < n; i++)
     {
         if (isdigit(s[i]))
-        {
-            cnt++;
-        }
+        cnt++;
     }
     if (cnt == n)
     {
@@ -57,7 +40,6 @@ int only_digits(string s)
     return false;
 }
 
-// function to convert string to integer
 int strtoint(string k)
 {
     int result = 0;
@@ -69,19 +51,4 @@ int strtoint(string k)
         exp--;
     }
     return result;
-}
-
-// function to generate encrypted letter
-int cipher(int key, char p)
-{
-    if (isupper(p))
-    {
-        int c = 'A' + ((p - 'A' + key) % 26);
-        return c;
-    }
-    else
-    {
-        int c = 'a' + (p - 'a' + key) % 26;
-        return c;
-    }
 }
