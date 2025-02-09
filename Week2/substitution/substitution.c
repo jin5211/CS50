@@ -41,7 +41,7 @@ int main(int argc, string argv[])
             {
                 if (isupper(text[k]))
                 {
-                    int n =  text[k] - 'A';
+                    int n = text[k] - 'A';
                     text[k] = upper_key[n];
                     printf("%c", text[k]);
                 }
@@ -97,8 +97,6 @@ bool check_char(string s)
     }
     return false;
 }
-
-
 
 bool check_duplicate(string s)
 {
