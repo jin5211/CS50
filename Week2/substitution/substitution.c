@@ -3,9 +3,11 @@
 #include <stdio.h>
 #include <string.h>
 
-bool check_char(string s);
-bool check_duplicate(string s);
+int check_key(string s);
+int check_strlen(string s);
+int check_duplicate(string s);
 string toUpperStr(string s);
+int check_alpha(string s);
 
 int main(int argc, string argv[])
 {
@@ -17,7 +19,7 @@ int main(int argc, string argv[])
             return 1;
         }
         // check whether key contains 26 characters or not
-        else if (check_char(argv[1]) == false)
+        else if (check_key(argv[1]) != 0)
         {
             printf("Key must contain 26 characters.\n");
             return 1;
@@ -62,66 +64,51 @@ int main(int argc, string argv[])
     }
 }
 
-bool check_char(string s)
+int check_key(string s)
 {
-    s = toUpperStr(s);
-    int lenStr = strlen(s);
-    string letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-    int lenLets = strlen(letters);
-    if (lenStr != strlen(letters))
+    if (check_strlen(s) == 0)
     {
-        return false;
-    }
-    else if (check_duplicate(s))
-    {
-        return false;
-    }
-    else
-    {
-        int cnt = 0;
-        for (int i = 0; i < lenStr; i++)
+        if (check_alpha(s) == 0)
         {
-            for (int j = 0; j < lenLets; j++)
+            s = toUpperStr(s);
+            if (check_duplicate(s) == 0)
             {
-                if (s[i] == letters[j])
-                {
-                    cnt++;
-                }
+                return 0;
             }
         }
-        if (cnt == lenLets)
-        {
-            return true;
-        }
-        return false;
     }
-    return false;
+    return 1;
 }
 
-bool check_duplicate(string s)
+int check_strlen(string s)
 {
-    s = toUpperStr(s);
+    const int n = 26;
+    if (strlen(s) != n)
+    {
+        return 1;
+    }
+    return 0;
+}
+
+int check_duplicate(string s)
+{
     int lenS = strlen(s);
-    int nums[lenS];
+    int n = 0;
     for (int i = 0; i < lenS; i++)
     {
-        nums[i] = 0;
         for (int j = 0; j < lenS; j++)
         {
             if (s[i] == s[j])
             {
-                nums[i]++;
+                n++;
             }
         }
     }
-    for (int k = 0; k < lenS; k++)
+    if (n != lenS)
     {
-        if (nums[k] > 1)
-        {
-            return true;
-        }
+        return 1;
     }
-    return false;
+    return 0;
 }
 
 string toUpperStr(string s)
@@ -131,4 +118,22 @@ string toUpperStr(string s)
         s[i] = toupper(s[i]);
     }
     return s;
+}
+
+int check_alpha(string s)
+{
+    int n = strlen(s);
+    int cnt = 0;
+    for (int i = 0; i < n; i++)
+    {
+        if (isalpha(s[i]))
+        {
+            cnt++;
+        }
+    }
+    if (cnt != n)
+    {
+        return 1;
+    }
+    return 0;
 }
