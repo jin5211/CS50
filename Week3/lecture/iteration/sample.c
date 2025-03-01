@@ -3,12 +3,9 @@
 void calc(int x, int y, int *a1, int *a2);
 
 int main(void) {
-    int calc1;
-    int calc2;
-    calc(30, 20, &calc1, &calc2);
-    printf("calc1 : %d\n", calc1);
-    printf("calc2 : %d\n", calc2);
-    return 0;
+    int array[5];
+    int len = sizeof(array) / sizeof(array[0]);
+    printf("%d\n", len);
 }
 
 void calc(int x, int y, int *a1, int *a2) {

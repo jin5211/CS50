@@ -1,64 +1,57 @@
 #include <stdio.h>
 
+// main関数以外の関数のプロトタイプの宣言
+void sort(int list[], int size);
+void printArray(int arr[], int size);
+
 int main(void)
 {
-    // Array of numbers
+    // 整数型の配列
     int numbers[] = {6, 4, 3, 1, 9, 7, 0, 8, 2, 5};
-    printf("Before sorting\n");
-    printf("numbers = ");
-    printf("[ %d,", numbers[0]);
-    printf(" %d,", numbers[1]);
-    printf(" %d,", numbers[2]);
-    printf(" %d,", numbers[3]);
-    printf(" %d,", numbers[4]);
-    printf(" %d,", numbers[5]);
-    printf(" %d,", numbers[6]);
-    printf(" %d,", numbers[7]);
-    printf(" %d,", numbers[8]);
-    printf(" %d]\n", numbers[9]);
-    // For i from 0 to n-1
-    for (int i = 0; i < 10; i++)
-    {
-        int temp = numbers[i];
-        int temp_pos = i;
-        // Find the smallest number between numbers[i] and numbers[n-1]
-        for (int j = i+1; j < 10; j++)
-        {
-            if (temp > numbers[j])
-            {
-                temp = numbers[j];
-                temp_pos = j;
-            }
-        }
-        // Swap smallest number with numbers[i]
-        numbers[temp_pos] = numbers[i];
-        numbers[i] = temp;
-    }
-    printf("After sorting\n");
-    printf("numbers = ");
-    printf("[ %d,", numbers[0]);
-    printf(" %d,", numbers[1]);
-    printf(" %d,", numbers[2]);
-    printf(" %d,", numbers[3]);
-    printf(" %d,", numbers[4]);
-    printf(" %d,", numbers[5]);
-    printf(" %d,", numbers[6]);
-    printf(" %d,", numbers[7]);
-    printf(" %d,", numbers[8]);
-    printf(" %d]\n", numbers[9]);
+    // 配列の要素数
+    int size = sizeof(numbers) / sizeof(numbers[0]);
 
-    return 0;
+    // 整列前の配列の表示
+    printf("整列前の配列の表示\n");
+    printArray(numbers, size);
+
+    // 配列を整列する
+    sort(numbers, size);
+
+    // 整列後の配列の表示
+    printf("整列後の配列の表示\n");
+    printArray(numbers, size);
 }
 
+void sort(int list[], int size) // 引数に整列対象の配列を受け取る
+{
+    int tmp; // 入替えの退避用
+    int min; // 最小値の要素番号
+    // 整列対象の配列を最初から順に参照する
+    for (int i = 0; i < size; i++)
+    {
+        min = i; // 最小値の要素番号を現在の要素番号で初期化
+        // 比較対象より後の要素を順に参照する
+        for (int j = i+1; j < size; j++)
+        {
+            // 比較対象より小さい値があれば、要素番号をminに代入する
+            if (list[j] < list[min])
+            {
+                min = j;
+            }
+        }
+        // 現在の要素を一旦退避して、最小値と入れ替える
+        tmp = list[i];
+        list[i] = list[min];
+        list[min] = tmp;
+    }
+}
 
-// numbers = {6, 4, 3, 1, 9, 7, 0, 8, 2, 5}
-// int tmp = numbers[0] = 6; int tmp_pos = i = 0;
-// 6 > 4 -> tmp = 4, tmp_pos = 1;
-// tmp(4) > 3 -> tmp = 3, tmp_pos = 2;
-// tmp(3) > 1 -> tmp = 1
-// tmp(1) < 9 -> tmp = 1
-// ......
-// tmp = 0, tmp_pos = 6;
-// After inner loop;
-// number[tmp_pos] = number[i];
-// number[i] = tmp;
+void printArray(int arr[], int size)
+{
+    for (int i = 0; i < size; i++)
+    {
+        printf("%d  ", arr[i]);
+    }
+    printf("\n");
+}
