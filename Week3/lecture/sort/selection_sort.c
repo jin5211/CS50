@@ -21,6 +21,8 @@ int main(void)
     // 整列後の配列の表示
     printf("整列後の配列の表示\n");
     printArray(numbers, size);
+
+    return 0;
 }
 
 void sort(int list[], int size) // 引数に整列対象の配列を受け取る
