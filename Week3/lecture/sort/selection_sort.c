@@ -30,6 +30,7 @@ int main(void)
                 temp_pos = j;
             }
         }
+        // Swap smallest number with numbers[i]
         numbers[temp_pos] = numbers[i];
         numbers[i] = temp;
     }
@@ -45,6 +46,8 @@ int main(void)
     printf(" %d,", numbers[7]);
     printf(" %d,", numbers[8]);
     printf(" %d]\n", numbers[9]);
+
+    return 0;
 }
 
 
