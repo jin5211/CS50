@@ -1,11 +1,11 @@
-sort1 uses: TODO
+sort1 uses: bubble sort
 
-How do you know?: TODO
+How do you know?: 三つのアルゴリズムの中で処理時間が一番長い
 
-sort2 uses: TODO
+sort2 uses: merge sort
 
-How do you know?: TODO
+How do you know?: 三つのアルゴリズムの中で処理時間が一番短い
 
-sort3 uses: TODO
+sort3 uses: selection sort
 
-How do you know?: TODO
+How do you know?: どのコマンドライン引数を利用してもほぼ同じ時間かかりました
