@@ -1,61 +1,93 @@
 #include <stdio.h>
 
+// main関数以外の関数のプロトタイプの宣言
+void mergeSort(int arr[], int left, int right);
+void merge(int arr[], int left, int mid, int right);
+void printArray(int arr[], int size);
+
 int main(void)
 {
-    // Array of numbers
+    // 整数型の配列
     int numbers[] = {6, 4, 3, 1, 9, 7, 0, 8, 2, 5};
-    printf("Before sorting\n");
-    printf("numbers = ");
-    printf("[ %d,", numbers[0]);
-    printf(" %d,", numbers[1]);
-    printf(" %d,", numbers[2]);
-    printf(" %d,", numbers[3]);
-    printf(" %d,", numbers[4]);
-    printf(" %d,", numbers[5]);
-    printf(" %d,", numbers[6]);
-    printf(" %d,", numbers[7]);
-    printf(" %d,", numbers[8]);
-    printf(" %d]\n", numbers[9]);
-    printf("==============================================\n");
-    int cnt = 1;
-    int length = sizeof(numbers) / sizeof(numbers[0]);
-    void merge_sort(int nums[10])
-    {
-        int len = sizeof(nums) /sizeof(nums[0]);
-        if (len = )
-    }
+    // 配列の要素数
+    int size = sizeof(numbers) / sizeof(numbers[0]);
 
-    printf("After sorting\n");
-    printf("numbers = ");
-    printf("[ %d,", numbers[0]);
-    printf(" %d,", numbers[1]);
-    printf(" %d,", numbers[2]);
-    printf(" %d,", numbers[3]);
-    printf(" %d,", numbers[4]);
-    printf(" %d,", numbers[5]);
-    printf(" %d,", numbers[6]);
-    printf(" %d,", numbers[7]);
-    printf(" %d,", numbers[8]);
-    printf(" %d]\n", numbers[9]);
+    // 整列前の配列の表示
+    printf("整列前の配列の表示\n");
+    printArray(numbers, size);
+
+    // 配列を整列する
+    mergeSort(numbers, 0, size-1);
+
+    // 整列後の配列の表示
+    printf("整列後の配列の表示\n");
+    printArray(numbers, size);
 
     return 0;
 }
 
+// マージソート本体
+void mergeSort(int arr[], int left, int right)
+{
+    if (left < right) {
+        int mid = left + (right - left) / 2;
 
-// int numbers[] = {6, 4, 3, 1, 9, 7, 0, 8, 2, 5};
-// len = sizeof(numbers) / sizeof(numbers[0])
-// if only one number(len == 1)
-//      quit;
-// else
-//      sort left half number
-//      sort right half number
-//      merge sorted halves
+        // 再帰的にソート
+        mergeSort(arr, left, mid);
+        mergeSort(arr, mid + 1, right);
 
+        // マージ
+        merge(arr, left, mid, right);
+    }
+}
 
-// 6, 4, 3, 1, 9(left);
-//      sort left half number
-// 1, 3, 4, 6, 9(left);
+// 配列をマージする関数
+void merge(int arr[], int left, int mid, int right)
+{
+    int n1 = mid - left + 1;
+    int n2 = right - mid;
 
-// 7, 0, 8, 2, 5(right);
-//      sort right half number
-// 0,
+    // 一時配列を作成
+    int L[n1], R[n2];
+
+    // データをコピー
+    for (int i = 0; i < n1; i++)
+        L[i] = arr[left + i];
+    for (int j = 0; j < n2; j++)
+        R[j] = arr[mid + 1 + j];
+
+    // マージ処理
+    int i = 0, j = 0, k = left;
+    while (i < n1 && j < n2) {
+        if (L[i] <= R[j]) {
+            arr[k] = L[i];
+            i++;
+        } else {
+            arr[k] = R[j];
+            j++;
+        }
+        k++;
+    }
+
+    // 残りの要素をコピー
+    while (i < n1) {
+        arr[k] = L[i];
+        i++;
+        k++;
+    }
+    while (j < n2) {
+        arr[k] = R[j];
+        j++;
+        k++;
+    }
+}
+
+// 配列を表示する関数
+void printArray(int arr[], int size)
+{
+    for (int i = 0; i < size; i++)
+    {
+        printf("%d  ", arr[i]);
+    }
+    printf("\n");
+}

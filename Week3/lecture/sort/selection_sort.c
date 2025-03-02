@@ -25,6 +25,7 @@ int main(void)
     return 0;
 }
 
+// 選択ソート本体
 void sort(int list[], int size) // 引数に整列対象の配列を受け取る
 {
     int tmp; // 入替えの退避用
@@ -49,6 +50,7 @@ void sort(int list[], int size) // 引数に整列対象の配列を受け取る
     }
 }
 
+// 配列を表示する関数
 void printArray(int arr[], int size)
 {
     for (int i = 0; i < size; i++)
