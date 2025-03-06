@@ -4,10 +4,13 @@
 
 int main(void)
 {
-    char *s = get_string("s: ");
-    char *t = get_string("t: ");
+    string s = get_string("s: ");
+    string t = get_string("t: ");
+    // printf("s = %p\n", s);
+    // printf("t = %p\n", t);
 
     if (strcmp(s, t) == 0)
+    // if (s == t)
     {
         printf("Same\n");
     }

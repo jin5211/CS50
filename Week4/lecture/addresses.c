@@ -25,9 +25,9 @@ int main(void)
     printf("s[0] : %c\n", *(s + 1));
     printf("s[0] : %c\n", *(s + 2));
     printf("s[0] : %i\n", *(s + 3));
-    printf("%s\n", s);
-    printf("%s\n", s + 1);
-    printf("%s\n", s + 2);
-    printf("%s\n", s + 3);
+    printf("s : %s\n", s);
+    printf("s + 1 : %s\n", s + 1);
+    printf("s + 2 : %s\n", s + 2);
+    printf("s + 3 : %s\n", s + 3);
     return 0;
 }
